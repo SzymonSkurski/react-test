@@ -1,0 +1,18 @@
+sudo: required
+services:
+  - dokcer
+
+before_install:
+  - docker build - szymonskurski/react-test -f ./client/Dockerfile.dev .
+
+script:
+  - docker run -e CI=true szymonskurski/react-test npm test
+
+after_success:
+  - docker build -t szymonskurski/multi-client ./client
+  - docker build -t szymonskurski/multi-nginx ./nginx
+  - docker build -t szymonskurski/multi-server ./server
+  - docker build -t szymonskurski/multi-worker ./worker
+  # log into dokcer CLI
+  
+  # push images into dockerhub
