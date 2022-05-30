@@ -3,10 +3,10 @@ services:
   - dokcer
 
 before_install:
-  - docker build - szymonskurski/react-test -f ./client/Dockerfile.dev .
+  - docker build - SzymonSkursrki/react-test -f ./client/Dockerfile.dev .
 
 script:
-  - docker run -e CI=true szymonskurski/react-test npm test
+  - docker run -e CI=true SzymonSkursrki/react-test npm test
 
 after_success:
   - docker build -t szymonskurski/multi-client ./client
@@ -14,5 +14,5 @@ after_success:
   - docker build -t szymonskurski/multi-server ./server
   - docker build -t szymonskurski/multi-worker ./worker
   # log into dokcer CLI
-  
+
   # push images into dockerhub
