@@ -14,5 +14,10 @@ after_success:
   - docker build -t szymonskurski/multi-server ./server
   - docker build -t szymonskurski/multi-worker ./worker
   # log into dokcer CLI
-
+  # DOCKER_PASSWORD and DOCKER_ID have to set in travis env variables
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # push images into dockerhub
+  - docker push -t szymonskurski/multi-client
+  - docker push -t szymonskurski/multi-nginx
+  - docker push -t szymonskurski/multi-server
+  - docker push -t szymonskurski/multi-worker
